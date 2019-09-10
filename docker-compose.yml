@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  jupyterlab:
+    container_name: jupyterlab
+    hostname: jupyterlab  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jupyterlab
+    restart: always
+    ports:
+      - ${HOST_PORT}:8888
+    volumes:
+      - ./notebooks:${JUPYTERLAB_NOTEBOOKS_DIR}
+      - ./data:${JUPYTERLAB_DATA_DIR}
+      - ./jupyterconfig:${JUPYTERLAB_CONFIG_DIR}
+    environment:
+      JUPYTERLAB_CONFIG_DIR: ${JUPYTERLAB_CONFIG_DIR}
+      JUPYTERLAB_NOTEBOOKS_DIR: ${JUPYTERLAB_NOTEBOOKS_DIR}
